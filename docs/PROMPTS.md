@@ -32,3 +32,6 @@ Commit everything.
 
 ### 2026-11-02: Push to GitHub
 Add this as origin and push main:https://github.com/aadityaarora/teddypups-clone
+
+### 2026-11-02: Fix Vercel "No Production Deployment"
+Vercel is connected to the GitHub repo but shows "No Production Deployment". Check: current branch name, whether origin exists, and what is on GitHub (git ls-remote origin). If the branch is not main, rename it to main and push it, set origin/main as upstream, and delete the remote master branch if it exists. Then make an empty commit "chore: trigger vercel deploy" and push to main.
