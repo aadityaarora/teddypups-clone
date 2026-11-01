@@ -18,3 +18,16 @@ export function useReducedMotion() {
     () => true,
   );
 }
+
+/** Live media-query match; false on the server */
+export function useMediaQuery(query: string) {
+  return useSyncExternalStore(
+    (cb) => {
+      const m = matchMedia(query);
+      m.addEventListener("change", cb);
+      return () => m.removeEventListener("change", cb);
+    },
+    () => matchMedia(query).matches,
+    () => false,
+  );
+}

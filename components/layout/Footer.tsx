@@ -2,11 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { PupStop } from "@/components/art/PupStop";
 import { pupSnugSvg } from "@/components/art/pup-svgs";
+import { Stars } from "@/components/art/Stars";
 import { footer, footerNav, site, socials } from "@/lib/data/site";
 
-const STAR = "M20 3c1.6 9.4 7.6 15.4 17 17-9.4 1.6-15.4 7.6-17 17-1.6-9.4-7.6-15.4-17-17 9.4-1.6 15.4-7.6 17-17z";
-
-// [left %, top %, width px] from recon; delays step by 0.4s
+// [left %, top %, width px] from recon
 const STARS: [number, number, number][] = [
   [6, 18, 12.6], [14, 42, 8.4], [23, 12, 9.8], [31, 30, 7], [44, 9, 11.2],
   [52, 36, 7.7], [63, 15, 10.5], [71, 40, 7], [92, 33, 8.4],
@@ -21,19 +20,7 @@ export function Footer() {
         <path d="M0 80V44c120-30 240-44 360-30s240 46 360 34 240-58 360-46 240 40 360 26v52z" />
       </svg>
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-6 h-64 overflow-hidden">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          {STARS.map(([left, top, width], i) => (
-            <svg
-              key={i}
-              viewBox="0 0 40 40"
-              className="tp-twinkle absolute text-honey"
-              style={{ left: `${left}%`, top: `${top}%`, width: `${width}px`, animationDelay: `${(i * 0.4).toFixed(2)}s` }}
-              aria-hidden="true"
-            >
-              <path d={STAR} fill="currentColor" />
-            </svg>
-          ))}
-        </div>
+        <Stars stars={STARS} className="pointer-events-none absolute inset-0" />
         <span className="tp-moon" />
       </div>
 
@@ -50,7 +37,7 @@ export function Footer() {
               <path d="M116 145 A96 12 0 0 1 308 145" className="tp-basket__rim-line" />
               <path d="M116 145 A96 12 0 0 1 308 145" className="tp-basket__rim" />
             </svg>
-            <PupStop svg={pupSnugSvg} label="Teddy, sitting snug in his basket" pose="snug" act="basket" className="tp-basket__pup" />
+            <PupStop svg={pupSnugSvg} label="Teddy, sitting snug in his basket" pose="snug" act="basket" behind lane className="tp-basket__pup" />
             <svg aria-hidden="true" viewBox="0 0 300 240" className="tp-basket__front">
               <path d="M116 145 C118 180 126 214 138 232 L286 232 C298 214 306 180 308 145 A96 12 0 0 1 116 145 Z" className="tp-basket__body" />
               <path d="M121 178 Q212 197 303 178 M127 206 Q212 223 297 206" className="tp-basket__weave" />

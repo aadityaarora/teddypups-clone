@@ -1,29 +1,13 @@
 import Link from "next/link";
 import { PupStop } from "@/components/art/PupStop";
 import { pupPeekSvg } from "@/components/art/pup-svgs";
-import { MediaImage } from "@/components/media/MediaImage";
+import { HeroLineup, type Friend } from "@/components/home/HeroLineup";
 import { availablePuppies } from "@/lib/data/puppies";
 import { hero, site } from "@/lib/data/site";
 
-// Seat geometry per lineup slot (recon/html/home.html inline styles)
-const SEATS = [
-  { x: "9%", w: "8.6rem", peek: 0.62, tilt: "-5deg" },
-  { x: "22.5%", w: "10.4rem", peek: 0.8, tilt: "3deg" },
-  { x: "35%", w: "9.2rem", peek: 0.7, tilt: "-2deg" },
-  { x: "65%", w: "9.4rem", peek: 0.74, tilt: "3deg" },
-  { x: "77.5%", w: "10.6rem", peek: 0.82, tilt: "-3deg" },
-  { x: "91%", w: "8.4rem", peek: 0.6, tilt: "4deg" },
-];
-
-const seatStyle = (i: number) => {
-  const s = SEATS[i];
-  return { "--x": s.x, "--w": s.w, "--peek": s.peek, "--tilt": s.tilt, "--i": i } as React.CSSProperties;
-};
-
 export function Hero() {
-  const lineup = availablePuppies.slice(0, SEATS.length);
-  // The 7th pup's photo is preloaded off-screen ("wings") for when the lineup rotates
-  const wings = availablePuppies[SEATS.length]?.images[0];
+  // Only what the client lineup needs, not the whole puppy record
+  const friends: Friend[] = availablePuppies.map(({ id, slug, displayName, breed, cover }) => ({ id, slug, displayName, breed, cover }));
 
   return (
     <section
@@ -53,32 +37,8 @@ export function Hero() {
       </div>
 
       <div className="tp-hero__stage">
-        <ul className="tp-lineup" aria-label={hero.lineupLabel}>
-          {lineup.map((p, i) => (
-            <li key={p.slug} className="tp-lineup__seat" style={seatStyle(i)}>
-              <Link className="tp-lineup__pup" data-pup-friend="true" aria-label={`Meet ${p.displayName}, ${p.breed}`} href={`/puppies/${p.slug}`}>
-                <span className="tp-lineup__photo">
-                  <MediaImage media={p.images[0]} sizes="11rem" priority={i < 2} loading="eager" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul aria-hidden="true" className="tp-lineup tp-lineup--tags">
-          {lineup.map((p, i) => (
-            <li key={p.slug} className="tp-lineup__seat" style={seatStyle(i)}>
-              <span className="tp-lineup__ghost">
-                <span className="tp-lineup__name font-scrawl">{p.displayName}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-        {wings && (
-          <span aria-hidden="true" className="tp-lineup__wings" data-for={SEATS.length}>
-            <MediaImage media={wings} alt="" sizes="11rem" loading="eager" />
-          </span>
-        )}
-        <PupStop svg={pupPeekSvg} label={hero.teddyLabel} pose="peek" act="peekaboo" className="tp-hero__teddy" />
+        <HeroLineup friends={friends} label={hero.lineupLabel} />
+        <PupStop svg={pupPeekSvg} label={hero.teddyLabel} pose="peek" act="peekaboo" behind lane className="tp-hero__teddy" />
         <div aria-hidden="true" className="tp-quilt">
           <svg className="tp-quilt__edge" width="100%" height="40" preserveAspectRatio="none">
             <defs>

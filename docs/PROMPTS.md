@@ -35,3 +35,6 @@ Add this as origin and push main:https://github.com/aadityaarora/teddypups-clone
 
 ### 2026-11-02: Fix Vercel "No Production Deployment"
 Vercel is connected to the GitHub repo but shows "No Production Deployment". Check: current branch name, whether origin exists, and what is on GitHub (git ls-remote origin). If the branch is not main, rename it to main and push it, set origin/main as upstream, and delete the remote master branch if it exists. Then make an empty commit "chore: trigger vercel deploy" and push to main.
+
+### 2026-11-02: Full home page below the hero
+Now build the full home page below the hero, section by section, exactly like recon/shots/*/home.png and recon/html/home.html: Meet the pups grid, Two ways to meet your puppy, Your puppy journey with the WhatsApp chat mockup and breed chips and showroom photo stack, Why families trust TeddyPups (puppy passport), Happy families testimonial + photo strip, Questions answered FAQ accordion, final CTA (welcome home). Take styles from recon/css/_all.css the same way you did for the hero. Run the verify loop after every 2 sections. Also add the lineup hover motion (duck, pop up, name tags) from the original JS. Commit and push when done.

@@ -29,6 +29,7 @@ const textOf = (s, re) => s.match(re)?.[1];
 
 const media = (m) => m && ({
   id: m.id, url: m.url, kind: m.kind, width: m.width, height: m.height, alt: m.alt,
+  ...(m.caption ? { caption: m.caption } : {}),
   focalX: m.focalX, focalY: m.focalY, color: m.color,
   ...(m.blurDataUrl ? { blurDataUrl: m.blurDataUrl } : {}),
   ...(m.durationS ? { durationS: m.durationS } : {}),
@@ -71,6 +72,7 @@ for (const f of files.sort()) {
     statusLabel: chip,
     breeds: l?.breeds ?? [],
     seoDescription: seo,
+    cover: media(l?.cover ?? gallery.find((m) => m.kind === 'image')),
     images: gallery.filter((m) => m.kind === 'image').map(media),
     video: gallery.filter((m) => m.kind === 'video').map(media),
     media: gallery.map(media),
@@ -100,6 +102,7 @@ export type Media = {
   width: number;
   height: number;
   alt: string;
+  caption?: string;
   focalX: number;
   focalY: number;
   color: string;
@@ -129,6 +132,8 @@ export type Puppy = {
   statusLabel?: string;
   breeds: { slug: string; name: string }[];
   seoDescription: string;
+  /** Card/lineup photo (listing cover; first gallery image for gone-home pups) */
+  cover: Media;
   images: Media[];
   video: Media[];
   /** Gallery order as on the detail page (images and videos mixed) */
@@ -175,4 +180,43 @@ await fs.writeFile('lib/data/faqs.ts', `${header}
 export type Faq = { id: string; question: string; answer: string };
 
 export const faqs: Faq[] = ${ts(faqs)};
+`);
+
+// ---------- Home sections (client-rendered ones carry a `section` object in the RSC) ----------
+const sections = {};
+for (const m of home.matchAll(/"section":\{/g)) {
+  const sec = jsonAt(home, m.index + '"section":'.length);
+  sections[sec.key] = { heading: sec.heading, body: sec.body, data: sec.data, media: (sec.media ?? []).map(media) };
+}
+// Chat props: "business":"…","greeting":"…","whatsappHref":"…","breeds":[…]
+const at = home.indexOf('"business":');
+const stringAfter = (k) => JSON.parse(home.slice(home.indexOf(k, at) + k.length).match(/^"(?:[^"\\]|\\.)*"/)[0]);
+const chatProps = { business: stringAfter('"business":'), greeting: stringAfter('"greeting":'), breeds: valueAfter(home, '"breeds":', at) };
+console.log('home sections', Object.keys(sections), 'chat breeds', chatProps.breeds?.length);
+await fs.writeFile('lib/data/home.ts', `${header}
+import type { Media } from "./puppies";
+
+export type HomeSection = {
+  heading: string;
+  body: string;
+  data: { ctaHref?: string; ctaLabel?: string; items?: { title: string; text: string }[]; mediaIds?: string[] };
+  media: Media[];
+};
+
+/** Sections the original renders client-side: meet, journey, families */
+export const homeSections: Record<"meet" | "journey" | "families", HomeSection> = ${ts(sections)};
+
+/** WhatsApp phone mockup in "Your puppy journey" */
+export const chat = ${ts({ business: chatProps.business, greeting: chatProps.greeting })};
+
+/** Breed chips in the first chat bubble (available puppies per breed, most first) */
+export const chatBreeds: { slug: string; name: string; n: number }[] = ${ts(chatProps.breeds)};
+`);
+
+// Home photo wall uses its own order (captioned photos first); append to home.ts
+const homePhotos = valueAfter(home, '"photos":').map(media);
+console.log('home photos', homePhotos.length, 'captioned', homePhotos.filter((p) => p.caption).length);
+await fs.appendFile('lib/data/home.ts', `
+/** Family photo wall on the home page (the first 8 are pinned up; the viewer pages through all) */
+export const homePhotos: Media[] = ${ts(homePhotos)};
 `);

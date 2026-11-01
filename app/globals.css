@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./styles/chrome.css";
+@import "./styles/home.css";
 
 /* Theme, base and components copied from the original compiled CSS (recon/css/10jf32vdx50lp.css).
    docs/DESIGN.md token names are kept as aliases further down. */
@@ -100,6 +101,7 @@
 }
 @utility text-big { font-size: clamp(2rem, 4.2vw, 4rem); }
 @utility text-huge { font-size: clamp(2.6rem, 6.4vw, 6.25rem); }
+@utility text-lede { font-size: clamp(1.125rem, 1.4vw, 1.375rem); line-height: 1.5; }
 
 @layer components {
   .btn{min-height:3.25rem;transition:transform .35s var(--ease-pounce), background-color .25s ease, box-shadow .35s var(--ease-silk);border-radius:999px;justify-content:center;align-items:center;gap:.6rem;padding:.85rem 1.6rem;font-size:1.0625rem;font-weight:650;line-height:1.1;text-decoration:none;display:inline-flex}

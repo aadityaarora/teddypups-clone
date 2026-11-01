@@ -7,6 +7,7 @@ export type Media = {
   width: number;
   height: number;
   alt: string;
+  caption?: string;
   focalX: number;
   focalY: number;
   color: string;
@@ -36,6 +37,8 @@ export type Puppy = {
   statusLabel?: string;
   breeds: { slug: string; name: string }[];
   seoDescription: string;
+  /** Card/lineup photo (listing cover; first gallery image for gone-home pups) */
+  cover: Media;
   images: Media[];
   video: Media[];
   /** Gallery order as on the detail page (images and videos mixed) */
@@ -62,6 +65,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet Max: Maltipoo, boy, 3 months old, imported. Real photos and video from TeddyPups U.A.E.",
+    "cover": {
+      "id": "Z0ToauDx7Eve",
+      "url": "/media/Z0ToauDx7Eve/5fffe4d022/b942a5_4b8cfb8204d24eadaf524332aba1dc15-mv2.webp",
+      "kind": "image",
+      "width": 607,
+      "height": 700,
+      "alt": "Max, male Maltipoo puppy",
+      "focalX": 0.538,
+      "focalY": 0.443,
+      "color": "#785838",
+      "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoOABAAA4BaJaACdADDh2BzkBgYAP7fiDE/p2cnGzv1iHeb8jE5aJgBJQmybF8YoVvvRHe4nUN9iSUxSGyKrEJHcsPXH+aABXyOu+rsgZDA2WKHZDyt4AAA"
+    },
     "images": [
       {
         "id": "Z0ToauDx7Eve",
@@ -160,6 +175,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Korean Teacup Maltipoo: Korean Teacup Maltipoo, girl, 2 months old, imported. Real photos and video from TeddyPups U.A.E.",
+    "cover": {
+      "id": "gAaGwoGej2g6",
+      "url": "/media/gAaGwoGej2g6/5523e884dd/b942a5_50f0ae67c9ff437d911597d52a9e63b3-mv2.jpg",
+      "kind": "image",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Female Korean Teacup Maltipoo puppy",
+      "focalX": 0.525,
+      "focalY": 0.426,
+      "color": "#e8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoMABAAA4BaJaACdAYu5bVY11T9AAD+5nqO0GWULDS1a5hjnq0jKw5izeyo9NmvN7/ipfbCw+eCT5E6hLvfDJ1k+CeWVpSTocdvqcxNmUTB8qElmu754sg5jwqCCjaQwVAAAA=="
+    },
     "images": [
       {
         "id": "gAaGwoGej2g6",
@@ -474,6 +501,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Korean Teacup Poodle: Korean Teacup Poodle, girl, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "xeMJCapr5vcU",
+      "url": "/media/xeMJCapr5vcU/e618c653b2/b942a5_14376a216177484dbbb27995d0f6aeb7-mv2.jpg",
+      "kind": "image",
+      "width": 960,
+      "height": 1280,
+      "alt": "Female Korean Teacup Poodle puppy",
+      "focalX": 0.545,
+      "focalY": 0.457,
+      "color": "#f8d8b8",
+      "blurDataUrl": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAAAwAgCdASoMABAAA4BaJbACdAYulbFzrEIxAAD4Q9LP3soivyZYNkZFnpwuvb2D32sfZUooLvFM+6bpuXM+SrZnUXl2ANT8ifxJC9H7bXkCGEdRNt07Z0Gf7HBU/t7Z8NnzPuk+klU6Qpgpzgh32yLU8AA="
+    },
     "images": [
       {
         "id": "xeMJCapr5vcU",
@@ -599,6 +638,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Maltipoo & Cavapoo: Maltipoo & Cavapoo, boy, 3 months Maltipoo & 2 months Cavapoo old, imported. Real photos and video from TeddyPups U.A.E.",
+    "cover": {
+      "id": "YQhey4j7uWvZ",
+      "url": "/media/YQhey4j7uWvZ/3ea10db6c1/b942a5_7ce7e7bd18424b6c8fb16dd30113ade2-mv2.jpg",
+      "kind": "image",
+      "width": 960,
+      "height": 1280,
+      "alt": "Male Maltipoo & Cavapoo puppy",
+      "focalX": 0.447,
+      "focalY": 0.295,
+      "color": "#b8a8a8",
+      "blurDataUrl": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAwAgCdASoMABAAA4BaJbACdAYtfzd3enfMAAD+3/WWuj75lp+ki5YusFrgepeZCJtNwM7IjTQuJ2r+L3i/rKdnUcnOGA6xG4vN5DAWdOHeB/N5EbjFNHJrpwhNNt6E+BPz4m0Tm3PExJSTg82wAA=="
+    },
     "images": [
       {
         "id": "YQhey4j7uWvZ",
@@ -721,6 +772,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Toy Poodle: Toy Poodle, boy & girl, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "vMu0BPvkAZ-j",
+      "url": "/media/vMu0BPvkAZ-j/c65e53967d/b942a5_0b2c0c0d178c4005acbe28725a5ea573-mv2.jpg",
+      "kind": "image",
+      "width": 960,
+      "height": 1280,
+      "alt": "Toy Poodle puppy",
+      "focalX": 0.654,
+      "focalY": 0.447,
+      "color": "#c8c8c8",
+      "blurDataUrl": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoMABAAA4BaJQBOgCHenFOCtQAA/u/P8GezJuelbXAGyqQluq8wMO7tl+W5HKJEe30ytlMk1SBL6hGk8YDFeiOm1AA="
+    },
     "images": [
       {
         "id": "vMu0BPvkAZ-j",
@@ -818,6 +881,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Maltipoo: Maltipoo, girl, 3 months old, imported. Real photos and video from TeddyPups U.A.E.",
+    "cover": {
+      "id": "3WJNmn6VVgVu",
+      "url": "/media/3WJNmn6VVgVu/732f779474/b942a5_2b5dcece361b4589890ae920c66a1b70-mv2.jpg",
+      "kind": "image",
+      "width": 960,
+      "height": 1280,
+      "alt": "Female Maltipoo puppy",
+      "focalX": 0.646,
+      "focalY": 0.423,
+      "color": "#080808",
+      "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABwAgCdASoMABAAA4BaJagCdAYuvk0sb6K3lIYAAP7m2nW2E3DgxRs4uBzMB4qNQ69vNSEypPmR/pmbhYDbBKuvQHR9tlybU1A7qkO4dzVdz5AJhiv1NXIRNGu5hAAA"
+    },
     "images": [
       {
         "id": "3WJNmn6VVgVu",
@@ -1084,6 +1159,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Pomeranian: Pomeranian, girl, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "3yOfnmoyPooH",
+      "url": "/media/3yOfnmoyPooH/81e0c7e00c/b942a5_556841b9a73942e5a9d782a683f3bc68-mv2.jpg",
+      "kind": "image",
+      "width": 720,
+      "height": 1280,
+      "alt": "Female Pomeranian puppy",
+      "focalX": 0.403,
+      "focalY": 0.443,
+      "color": "#080808",
+      "blurDataUrl": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoJABAAA4BaJQBOgBsjd1RAAP7yNFu+YEtpSceQZ33PyZ7KzmxvqdzTiDlKiH0X4tIqZJwvEf+wzWM7cWmxuoq10Hu8HuCAAAA="
+    },
     "images": [
       {
         "id": "3yOfnmoyPooH",
@@ -1181,6 +1268,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet Copper: Cavapoo, boy, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "O-6w4FYqE10j",
+      "url": "/media/O-6w4FYqE10j/be76f399cc/b942a5_bb73ebbb952047988f944f3a8e3052bd-mv2.jpg",
+      "kind": "image",
+      "width": 836,
+      "height": 1280,
+      "alt": "Copper, male Cavapoo puppy",
+      "focalX": 0.43,
+      "focalY": 0.505,
+      "color": "#e8d8c8",
+      "blurDataUrl": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQAgCdASoKABAAA4BaJbACdADMqojjOocAAP7PZYKA+Lu8lWU7z7yQUWO6xMkMk/OmshQ8mZA+f3Evp0OojmSqKnf21Ul3U75HVD+vAEFXGeTLuWPRnUH/DhavO7O6WL+rV4ghxAA="
+    },
     "images": [
       {
         "id": "O-6w4FYqE10j",
@@ -1302,6 +1401,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Shih Tzu: Shih Tzu, girl, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "qNrTCSrsYyzY",
+      "url": "/media/qNrTCSrsYyzY/168fa8c4ff/b942a5_eb14616c76c24da89afe7fa3b7d7ae6a-mv2.jpeg",
+      "kind": "image",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Female Shih Tzu puppy",
+      "focalX": 0.448,
+      "focalY": 0.425,
+      "color": "#383848",
+      "blurDataUrl": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAABQAgCdASoMABAAA4BaJYgCdAYtBqZoGcirboAA9r+jbrEhAwhPsoIvgbY33OnUHj+EOZlCqhDjhTrE+9DVdd/ginf3jvE8NvMxf5CNQ3U+twkNZIjq5CXVHlCovswbZGns2ZsLfOgNo3KaTV0/QAAA"
+    },
     "images": [
       {
         "id": "qNrTCSrsYyzY",
@@ -1375,6 +1486,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Shih Tzu: Shih Tzu, boy, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "crgs9ih6as_M",
+      "url": "/media/crgs9ih6as_M/e37bafb1bf/b942a5_344e49c6c34940d2b09a3ddd5c2e3234-mv2.jpg",
+      "kind": "image",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Male Shih Tzu puppy",
+      "focalX": 0.403,
+      "focalY": 0.436,
+      "color": "#787888",
+      "blurDataUrl": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQAQCdASoMABAAA4BaJQAAQLNSR2l5IADK9yf+AzwQ9BQ8jb7oIfyEbZpGzu7BpNCWLXmL7uQ2XIFWGGhAb3C39Su82ZG8HdqZFgBIT6YkBca8xMy9wAWQNPMVkA2/wTG69soqIAA="
+    },
     "images": [
       {
         "id": "crgs9ih6as_M",
@@ -1448,6 +1571,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Maltipoo: Maltipoo, girl, 2.5 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "wNm2_VIBEQvK",
+      "url": "/media/wNm2_VIBEQvK/4b68f59e75/b942a5_7dd33c9b78c04f78a6a1c7386fb55620-mv2.jpg",
+      "kind": "image",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Female Maltipoo puppy",
+      "focalX": 0.475,
+      "focalY": 0.505,
+      "color": "#e8d8c8",
+      "blurDataUrl": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABwAgCdASoMABAAA4BaJbACdAYuvwkVUSPQ+QYAAP7ohuzS5qIDPaKmcMlTXyd9Lev8DaKs8q6LU9/8AJClSRiV+XZfgdyco81756axiYDMVLe1cfLTyNgaiibRcnvOyJFIxWGE5GVOI+xP3trp8PogAAA="
+    },
     "images": [
       {
         "id": "wNm2_VIBEQvK",
@@ -1569,6 +1704,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Maltipoo: Maltipoo, girl, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "lMhASnmIIVQ4",
+      "url": "/media/lMhASnmIIVQ4/ad2353ad31/b942a5_6a5617708d75408b8f73725080ed0149-mv2.jpg",
+      "kind": "image",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Female Maltipoo puppy",
+      "focalX": 0.569,
+      "focalY": 0.492,
+      "color": "#e8d8c8",
+      "blurDataUrl": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAwAgCdASoMABAAA4BaJagCdAYtpj8SXtcKAAD+653Voze04JdV9qv3vONq3OJeMnOKtPUufFf+xE52o/vxLp1jbGhiuHbFN2+v3SpYSJ9uAOvkfeXlIk3eSgY9R/Flt6Kx2GE5E45jgLU2vBAAAA=="
+    },
     "images": [
       {
         "id": "lMhASnmIIVQ4",
@@ -1690,6 +1837,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Korean Teacup Pomeranian: Korean Teacup Pomeranian, girl, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "EsAq2LSRvVCJ",
+      "url": "/media/EsAq2LSRvVCJ/4d553ed044/b942a5_a8d264c1aa754d80bc7c98917dfd1fda-mv2.jpg",
+      "kind": "image",
+      "width": 960,
+      "height": 1280,
+      "alt": "Female Korean Teacup Pomeranian puppy",
+      "focalX": 0.499,
+      "focalY": 0.513,
+      "color": "#d8d8d8",
+      "blurDataUrl": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoMABAAA4BaJZQC7ADbpB6XHIAA/uxVzSDe/DtCzUnRPkZd9KmquF9qY0j77BtYejaM+fU0JZcXxWHjXMsUZCNMbAAAAA=="
+    },
     "images": [
       {
         "id": "EsAq2LSRvVCJ",
@@ -1763,6 +1922,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Korean Teacup Pomeranian: Korean Teacup Pomeranian, girl, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "vzf7P8SPCZ-Q",
+      "url": "/media/vzf7P8SPCZ-Q/a8db4ee114/b942a5_967bb346583b4146acb56607f5da5f21-mv2.jpg",
+      "kind": "image",
+      "width": 1260,
+      "height": 1598,
+      "alt": "Female Korean Teacup Pomeranian puppy",
+      "focalX": 0.499,
+      "focalY": 0.486,
+      "color": "#484848",
+      "blurDataUrl": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABwAgCdASoNABAAA4BaJbACdH8Agry+Of6bOVcAAP5JUfqs6Guyokzl46/bHBWT3xNtMMqA5dSiIwp+3PWfxsdyRKol+RcxAUNcANQBgkdNgVXUsQOHz2xX413Qi7sjYliy6PQIXLdhscJAj7HP+J/SAAA="
+    },
     "images": [
       {
         "id": "vzf7P8SPCZ-Q",
@@ -1836,6 +2007,18 @@ export const puppies: Puppy[] = [
       }
     ],
     "seoDescription": "Meet this Korean Teacup Pomeranian: Korean Teacup Pomeranian, boy, 2 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "nZTGFv46hrZI",
+      "url": "/media/nZTGFv46hrZI/fb9eeefc9c/b942a5_dcb8eb174915463ea0c40c58b7b0e406-mv2.jpg",
+      "kind": "image",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Male Korean Teacup Pomeranian puppy",
+      "focalX": 0.489,
+      "focalY": 0.441,
+      "color": "#080808",
+      "blurDataUrl": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQAgCdASoMABAAA4BaJZAAD5MtVYFH++YgAP7PgwPGR41qFvLq2OifAZyvZukzNhKOrE1zybgTuvaUl/Q8Pa4U+xm6YeXoRgM90KI/SZtQ54K7/AyKWibTtJB9jYb/96v4U6qcKe+hmAAA"
+    },
     "images": [
       {
         "id": "nZTGFv46hrZI",
@@ -1953,6 +2136,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Ace: Pomeranian, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "mihUKGFCatU3",
+      "url": "/media/mihUKGFCatU3/0461cca56e/27b888_bac41adfadc44dce846a1c3fd0cdb0de-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Ace, male Pomeranian puppy",
+      "focalX": 0.528,
+      "focalY": 0.462,
+      "color": "#f8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAkAA4BaJZgCdAD6lyxnE5gA/vUdfS3S9llTf7T8WWOlpR6zFXZaZPzkUnjJ7ITUwl1NqvAS7LI6ezVgAAAA"
+    },
     "images": [
       {
         "id": "mihUKGFCatU3",
@@ -2070,6 +2265,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Leo: Poodle, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "QgFG5s09n-ss",
+      "url": "/media/QgFG5s09n-ss/81af626d2d/27b888_5f9a7189bb21477d832047aae2040921-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Leo, male Poodle puppy",
+      "focalX": 0.521,
+      "focalY": 0.38,
+      "color": "#f8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAkAA4BaJZgCdAEXVjodqVdAAP7wtIqbFluAYdHhD47cmAqK76S/Bnqg9Z1MqGnh/niEYPv+MJYECz55I0qsZs3/xQUBrihy8vGOvdSWkDJgOq0AAA=="
+    },
     "images": [
       {
         "id": "QgFG5s09n-ss",
@@ -2187,6 +2394,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Mia: Maltipoo, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "4vu6_PGfL64H",
+      "url": "/media/4vu6_PGfL64H/537c367d85/27b888_747a4667fec640c69aad9bc045d61ac6-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Sadie, female Maltipoo puppy, photo 4",
+      "focalX": 0.503,
+      "focalY": 0.432,
+      "color": "#b88878",
+      "blurDataUrl": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoQAAkAA4BaJbACdADiJCiW4AD+lpt5p9Duc4NMoGn9XK40o98AD/7wHRG88MZtD4aW3WHfS244vZPz6RB8j+03IlrB88jbfBszWzgQAAA="
+    },
     "images": [
       {
         "id": "4vu6_PGfL64H",
@@ -2304,6 +2523,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Sadie: Maltipoo, girl, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "159oT4F46uhk",
+      "url": "/media/159oT4F46uhk/b66c2be87f/27b888_ea6e7e0fcd43447d854657b6de98d4cb-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Sadie, female Maltipoo puppy",
+      "focalX": 0.479,
+      "focalY": 0.418,
+      "color": "#f8d8d8",
+      "blurDataUrl": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQAAkAA4BaJbACdAYtzqhfulpWAAD+68DyKTC7PKvhvJL2N/+DD4Ufjbf+JtjVXhYpn1xzv8eIDJINbPOUJnSSy/tRuppotA3AR+33CBn1xy3W+Jbfhj4SR/m/ZL5LAAA="
+    },
     "images": [
       {
         "id": "159oT4F46uhk",
@@ -2421,6 +2652,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet this Pomeranian: Pomeranian, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "bMSEHnYcBTFF",
+      "url": "/media/bMSEHnYcBTFF/970fdc1ee6/27b888_5e612a215bf343328c08d99e0e9c5a37-mv2.avif",
+      "kind": "image",
+      "width": 980,
+      "height": 551,
+      "alt": "Male Pomeranian puppy",
+      "focalX": 0.523,
+      "focalY": 0.516,
+      "color": "#887878",
+      "blurDataUrl": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoQAAkAA4BaJQBOgCP30bbr0AD+fnoCm/t3HZ1Ad98wqwTTxks3g4s4WrLbC+KMi/kqx8QRBJRxhwxDc9cIAA=="
+    },
     "images": [
       {
         "id": "bMSEHnYcBTFF",
@@ -2466,6 +2709,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Ollie: Pomsky, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "Qs2IHRk7OQIm",
+      "url": "/media/Qs2IHRk7OQIm/c16bea255c/27b888_ef3324a358d64858b4873a146574c3b9-mv2.avif",
+      "kind": "image",
+      "width": 680,
+      "height": 382,
+      "alt": "Ollie, male Pomsky puppy",
+      "focalX": 0.532,
+      "focalY": 0.381,
+      "color": "#b8c888",
+      "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAkAA4BaJZACdADPmIBnAnQAAP7hb8AsMlKDhcVjo4mfyMqec4F3Fmthyk+FSBtL6k8Lmxgtp9kNQ4NLFTOnAk43WqM30kixlujJE5LyPouctAAAAA=="
+    },
     "images": [
       {
         "id": "Qs2IHRk7OQIm",
@@ -2559,6 +2814,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Bruno: Maltipoo, boy, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "w-F8mJLs2gtj",
+      "url": "/media/w-F8mJLs2gtj/f06147a6d3/27b888_301f58cbae624a1da36a79d46571043a-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Bruno, male Maltipoo puppy",
+      "focalX": 0.464,
+      "focalY": 0.388,
+      "color": "#f8f8f8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAkAA4BaJbACdAEXTlh6dIMAAP72XUshMzW6F9JwG2lo34nF+h2JrQeEtTY5IrAtbv1sUE/WjpUHpmShlPx7xgsPTqBfHdwZvLBt5JDSWaKJztUPAsAA"
+    },
     "images": [
       {
         "id": "w-F8mJLs2gtj",
@@ -2676,6 +2943,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Buddy: Maltese, boy, 2 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "5ygCaO2TQb3v",
+      "url": "/media/5ygCaO2TQb3v/f23ade89fa/27b888_6053b478acb641d1865de22aef938977-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Buddy, male Maltese puppy",
+      "focalX": 0.483,
+      "focalY": 0.376,
+      "color": "#d8d8d8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAkAA4BaJZgCdADHaA051AAA/ltaE2nPK1k64YD/2DtTHiVbFJW5CbUHAUqjFrbXlz5JNSkaoVeM9BW1Ru1OWtvcHWwodRfLR5BO491mAAAA"
+    },
     "images": [
       {
         "id": "5ygCaO2TQb3v",
@@ -2721,6 +3000,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Charlie: Maltese, boy, 3.5 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "0c1rFiKXQLLk",
+      "url": "/media/0c1rFiKXQLLk/75c6a20e15/27b888_b22287e7c1594de7ab2fba46eabea376-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Charlie, male Maltese puppy",
+      "focalX": 0.468,
+      "focalY": 0.334,
+      "color": "#e8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAkAA4BaJZACdAD5LGPVGIAA/gYA/gAaAAMnsshtJRY+/2nk2efYjExTLnJCCyLwNDBgHPdncwUj0TtjUeczzREG1LtR8v6VXb6SYC0xi7BHY7gAAA=="
+    },
     "images": [
       {
         "id": "0c1rFiKXQLLk",
@@ -2766,6 +3057,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Daisy: Pomeranian, girl, 2 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "d_ji2d9LVy0R",
+      "url": "/media/d_ji2d9LVy0R/b19b4cf1c2/27b888_c6cbb607448f469a96d73f3bc42a992d-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Daisy, female Pomeranian puppy",
+      "focalX": 0.478,
+      "focalY": 0.384,
+      "color": "#e8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAkAA4BaJagCdAEC2D5yGg+AAP7t6kffLNdjHBeG9y5wIPd7XKpkwe7NKy3ch7GVMHAQyT8YBcidYaJP/kNqiphgfH/pkfvneXVaohhGJsgmIwPQAA=="
+    },
     "images": [
       {
         "id": "d_ji2d9LVy0R",
@@ -2811,6 +3114,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Bella: Pomeranian, girl, 4 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "9jwfs8kSZW7K",
+      "url": "/media/9jwfs8kSZW7K/9b8ae31d11/27b888_ab014eabe44c4f6ebaacb9ef1869823f-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Bella, female Pomeranian puppy",
+      "focalX": 0.494,
+      "focalY": 0.369,
+      "color": "#181828",
+      "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoQAAkAA4BaJZACdACq22e8qxAA/h5tmtf6b3Jvmo1y3rrtq41/PC2ixyi3JSPU21wrrWKCfZsOw4pcx7aOW2BludfI8PmwNeR26J3ES6xmsmGAAAA="
+    },
     "images": [
       {
         "id": "9jwfs8kSZW7K",
@@ -2856,6 +3171,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Teddy: Poodle, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "9XFYXsuvjIcz",
+      "url": "/media/9XFYXsuvjIcz/8d1efc8baa/27b888_430ebbf87dc84b93bcd0b61709a2eaa7-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Teddy, male Poodle puppy",
+      "focalX": 0.398,
+      "focalY": 0.375,
+      "color": "#e8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAABQAgCdASoQAAkAA4BaJYwCdAYsZyZv3velBgAAzjp7cmj/5JzRW5QCR5VWIDXbqD8hyYM2lDo3ZUwMe/fIyFzNi7gHkkXWVHbnXgnoHJVVsIBw3GCJ83xQAAA="
+    },
     "images": [
       {
         "id": "9XFYXsuvjIcz",
@@ -2901,6 +3228,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Molly: Poodle, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "WZKcpiogRBW7",
+      "url": "/media/WZKcpiogRBW7/9ebcb8d165/27b888_2b9e32b056624a45b62f7d7b4ec7d105-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Molly, female Poodle puppy",
+      "focalX": 0.533,
+      "focalY": 0.377,
+      "color": "#c8a898",
+      "blurDataUrl": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoQAAkAA4BaJbACdAC6h5rOQAD+sBDIcLH0OZye4LWe0Ou+OfNOUfuQNjr7sts3yfU/o2EIEmc1TUdc8dAaCzTllaLZr7l+gaAAAA=="
+    },
     "images": [
       {
         "id": "WZKcpiogRBW7",
@@ -2946,6 +3285,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Coco: Pomsky, girl, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "CXIzj6hYrmuI",
+      "url": "/media/CXIzj6hYrmuI/eff60812df/27b888_ce94335cf4714a99a78c799f666f9323-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Coco, female Pomsky puppy",
+      "focalX": 0.603,
+      "focalY": 0.385,
+      "color": "#f8f8f8",
+      "blurDataUrl": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQAAkAA4BaJaACdAYulnbKI51vaAD9/KduH7cFqFYQ1B1mfLSKSMc1odzT1vdPbxRp1sxDPV0cVaGhiXB2jnrs4eB5p7ommUsRMW0h4jodn0opkRp19kJrpKAAAA=="
+    },
     "images": [
       {
         "id": "CXIzj6hYrmuI",
@@ -3039,6 +3390,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Rosie: Pomsky, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "FhrW7pE84bji",
+      "url": "/media/FhrW7pE84bji/f7c57baf49/27b888_08271c7de284451fb9c848757f4838fb-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Rosie, female Pomsky puppy",
+      "focalX": 0.491,
+      "focalY": 0.378,
+      "color": "#e8d8b8",
+      "blurDataUrl": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAACwAQCdASoQAAkAA4BaJYwCdACxOIwAAP6bHtP/cNiQM6efgZ21Wf8O93AKJbViawKqLMgthDHOjGF8ULpaRfWpZ9uFUYZheTkPce9lGwe+iQAA"
+    },
     "images": [
       {
         "id": "FhrW7pE84bji",
@@ -3156,6 +3519,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Leo: Pomeranian, boy, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "5iCniMJshKud",
+      "url": "/media/5iCniMJshKud/8bfe42003c/27b888_84815fae2bd34283a7c79985cfc8b568-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Leo, male Pomeranian puppy",
+      "focalX": 0.574,
+      "focalY": 0.324,
+      "color": "#e8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAkAA4BaJZwC7AEfhv79S+gAAP7oAMrALwaZxMWl/tFNe+0bui49eHJOV9KfBbqv/gshCq/4C1tyNO2uAAAA"
+    },
     "images": [
       {
         "id": "5iCniMJshKud",
@@ -3297,6 +3672,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Molly: Poodle, girl, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "lsaKvJhLwHB4",
+      "url": "/media/lsaKvJhLwHB4/4cf2a02ed1/27b888_5aa959cec570411a8bb9372abe23f5e9-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Molly, female Poodle puppy",
+      "focalX": 0.591,
+      "focalY": 0.377,
+      "color": "#784828",
+      "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoQAAkAA4BaJagCdAD1kRhutLAA/slbs+oUlHXqW0Uy0jrXGXWYgqjhf8xfFuOIlYWVkE6FRIYoHEb1fuaZ03RIkCJIGEjlnsF83QexGWp/oWcH/sXtlgAA"
+    },
     "images": [
       {
         "id": "lsaKvJhLwHB4",
@@ -3390,6 +3777,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Rocky: Poodle, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "51aMfxO7oeVe",
+      "url": "/media/51aMfxO7oeVe/6b70c96b1e/27b888_77a51d530b694ba58bc207f2a23e8620-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Rocky, male Poodle puppy",
+      "focalX": 0.493,
+      "focalY": 0.38,
+      "color": "#f8e8f8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQAAkAA4BaJZACdAEXsv4xUPo7QAD+1imgsgC2uTAqmsFzhU/RPjVAbefFFrdfE5o/aQVNDe0+qeRnf3nwP/feePXN2lj5LNBwRaEO12wAAA=="
+    },
     "images": [
       {
         "id": "51aMfxO7oeVe",
@@ -3483,6 +3882,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Sophie: Maltipoo, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "PYYTxpqgo76_",
+      "url": "/media/PYYTxpqgo76_/ae53ae6d3c/27b888_0d89c05fa55c43d4b6d55d573be83e73-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Sophie, female Maltipoo puppy",
+      "focalX": 0.476,
+      "focalY": 0.378,
+      "color": "#d8b898",
+      "blurDataUrl": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoQAAkAA4BaJagCdAYtLSojtSAA/uJ2tMRrEz3l9k6iExlCsyp9eaU3eABDLmNCwMqvRE6Vg2co7JH75TrWivWRUnwr4n6j9v4P+KD9urX2u7d1Zaf+XwAA"
+    },
     "images": [
       {
         "id": "PYYTxpqgo76_",
@@ -3576,6 +3987,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Lola: Maltipoo, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "HPs4cYizPzy9",
+      "url": "/media/HPs4cYizPzy9/22b104e2c5/27b888_f24865b2456b46feb6ea6694fe90660f-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Lola, female Maltipoo puppy",
+      "focalX": 0.543,
+      "focalY": 0.373,
+      "color": "#f8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoQAAkAA4BaJZACdADp+guFlyAA/vC0nB6Zmm9y71ftDOrPLHZ06b6ShjWszGzWR2qXXW+2EKc3y0JT6Mhtgh22UoJGsQaAkryYt1YAAAA="
+    },
     "images": [
       {
         "id": "HPs4cYizPzy9",
@@ -3693,6 +4116,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Rex: Pomeranian, boy, 5 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "QIIvMqQTe9jr",
+      "url": "/media/QIIvMqQTe9jr/d997ae172e/27b888_14fd6ec24bd94522bd54a5ae345240b8-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Rex, male Pomeranian puppy",
+      "focalX": 0.497,
+      "focalY": 0.369,
+      "color": "#c8b8b8",
+      "blurDataUrl": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQAAkAA4BaJQBOgCBiUVEXCAD+J34RM7hDnQQcA9q8oboBs/AMO4x6bOl2TeniTuWwP1ZUn/YlHy5rBB5sOQtdAOOwQz+7xe92PAAA"
+    },
     "images": [
       {
         "id": "QIIvMqQTe9jr",
@@ -3786,6 +4221,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Finn: Pomsky, boy, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "tEAwWspMD8iG",
+      "url": "/media/tEAwWspMD8iG/1f55440daf/27b888_c68794a6e9ee442abb522a1d88a1e8cd-mv2.avif",
+      "kind": "image",
+      "width": 980,
+      "height": 551,
+      "alt": "Finn, male Pomsky puppy",
+      "focalX": 0.568,
+      "focalY": 0.501,
+      "color": "#b8b8b8",
+      "blurDataUrl": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQAAkAA4BaJYgCdIExFxK111dK1AAA/tKisucqXWWOalPAGaMit5TeskAKoh5METexDKZe2VJOiT8mBfamOkg4+0XDPw9Khms4FagXN8tang/dr28AE6pwSqQAAA=="
+    },
     "images": [
       {
         "id": "tEAwWspMD8iG",
@@ -3831,6 +4278,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Zoe: Maltipoo, girl, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "fxj_9aZOSxQM",
+      "url": "/media/fxj_9aZOSxQM/90c10b9c91/27b888_89e442e0035442308fc87fe3d2837f1d-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Zoe, female Maltipoo puppy",
+      "focalX": 0.328,
+      "focalY": 0.376,
+      "color": "#f8e8c8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAkAA4BaJaACdAD8dE9GiGAAAP7n//AtZS22+joULjfsi5MB/mefptbI8nFZlqT1EgHPJmvWFb9RM9XzyHjwtDBFyOsMTk6GygT7cAA="
+    },
     "images": [
       {
         "id": "fxj_9aZOSxQM",
@@ -3972,6 +4431,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Mimi: Pomeranian, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "BLOZLPixUcjE",
+      "url": "/media/BLOZLPixUcjE/ea8ee97fd9/27b888_870c748ca6ee45cf8e0a311232dfe289-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Mimi, female Pomeranian puppy",
+      "focalX": 0.581,
+      "focalY": 0.41,
+      "color": "#f8e8e8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAkAA4BaJbACdAEC1k8LFWAAAP7KlWI8RxAVlv/N/0F4t9/w2xhf8oeKLsb+01YYRbjxNjzTubcemnPGO1LvW/eVrQHjvhMNr9+AzMIAAA=="
+    },
     "images": [
       {
         "id": "BLOZLPixUcjE",
@@ -4137,6 +4608,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet Bailey: Bichon, boy, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "fI-hlHuSwrRw",
+      "url": "/media/fI-hlHuSwrRw/e5ae9b6384/27b888_8d87239e23854214a8718ef8f02c2d50-mv2.avif",
+      "kind": "image",
+      "width": 720,
+      "height": 405,
+      "alt": "Bailey, male Bichon puppy",
+      "focalX": 0.516,
+      "focalY": 0.428,
+      "color": "#c8c8c8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoQAAkAA4BaJQBOgMVkwu94SAD8tKK4kEFRUx3qSInFi0DDSzsyYUKo7v/guWoOEY153vAmZLFP7NRw62xrMIwiJUbBm+s8wPjHX8AA8PhEAAAA"
+    },
     "images": [
       {
         "id": "fI-hlHuSwrRw",
@@ -4230,6 +4713,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet this Maltipoo: Maltipoo, girl, 3 months old, imported. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "Cl0B4v8U3Y-d",
+      "url": "/media/Cl0B4v8U3Y-d/3dea5a9fec/27b888_1ae70e063fd7451a87d4dfe79794d58f-mv2.avif",
+      "kind": "image",
+      "width": 980,
+      "height": 551,
+      "alt": "Female Maltipoo puppy",
+      "focalX": 0.483,
+      "focalY": 0.313,
+      "color": "#182808",
+      "blurDataUrl": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAkAA4BaJagCdAEVHACcSgAA/i/LifIcYmMBYhQVrn2V+DCft7syiswfoP5/5VjMh/KCpZTGf51uWTDo9jAEt6nEXbqsPEj47A/9NmMYtMCLPAAAAA=="
+    },
     "images": [
       {
         "id": "Cl0B4v8U3Y-d",
@@ -4275,6 +4770,18 @@ export const puppies: Puppy[] = [
     "statusLabel": "Gone home ♥",
     "breeds": [],
     "seoDescription": "Meet this Poodle: Poodle, girl, 3 months old, in Dubai. Real photos from TeddyPups U.A.E.",
+    "cover": {
+      "id": "sFgPBojUhFBo",
+      "url": "/media/sFgPBojUhFBo/5ac1429cf4/27b888_aa0ce426ca3848abbc7d695f8c818568-mv2.avif",
+      "kind": "image",
+      "width": 980,
+      "height": 551,
+      "alt": "Female Poodle puppy",
+      "focalX": 0.44,
+      "focalY": 0.328,
+      "color": "#d8d8d8",
+      "blurDataUrl": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoQAAkAA4BaJYwCdIDZElvxow64AAD+79f31xtR81BNYbcIirOrDTe8c5P4CIv/i47P/lEGyUZ2ghG0ST/ypH3m+a0VZZ2/QZUuCyD+C+Q+TgAA"
+    },
     "images": [
       {
         "id": "sFgPBojUhFBo",

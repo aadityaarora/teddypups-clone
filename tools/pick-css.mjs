@@ -1,5 +1,5 @@
 // Pick rules from the original compiled CSS by selector, keeping @media/@supports wrappers
-// usage: node tools/pick-css.mjs <regex> [--keyframes name1,name2] > out.css
+// usage: node tools/pick-css.mjs <regex> [--keyframes name1,name2] [--auto-keyframes] [--pretty] > out.css
 // e.g.   node tools/pick-css.mjs "\.tp-(header|menu)" --keyframes tp-menu-in,tp-menu-out
 // Reads recon/css/10jf32vdx50lp.css (Tailwind layers are unwrapped; utilities are skipped unless matched)
 
@@ -61,8 +61,36 @@ function emit(nodes) {
   return out;
 }
 
+// --auto-keyframes: also include every @keyframes referenced by the picked rules
+if (process.argv.includes('--auto-keyframes')) {
+  const names = new Set([...css.matchAll(/@keyframes\s+([\w-]+)/g)].map((m) => m[1]));
+  for (const m of emit(parse(css)).matchAll(/animation(?:-name)?:([^;}]*)/g)) for (const w of m[1].split(/[\s,]+/)) if (names.has(w)) wantKf.add(w);
+}
 const result = emit(parse(css));
-// one rule per line for readability
-let pretty = '';
-for (const c of result) { pretty += c; if (c === '}') pretty += '\n'; }
-process.stdout.write(pretty);
+
+// --pretty: indented, one declaration per line (same style as app/styles/*.css)
+function format(nodes, depth = 0) {
+  const pad = '  '.repeat(depth);
+  return nodes.filter((n) => !n.statement).map((n) => {
+    const head = n.prelude.replace(/\s*,\s*(?![^()]*\))/g, `,\n${pad}`).replace(/:(hover|focus|is|not|where|has)\(/g, ':$1(');
+    if (n.children) return `${pad}${head} {\n${format(n.children, depth + 1)}${pad}}\n`;
+    if (/^@keyframes/.test(n.prelude)) {
+      const steps = parse(n.body).map((k) => `${pad}  ${k.prelude} { ${k.body.split(';').filter(Boolean).map((d) => d.trim().replace(/:\s*/, ': ')).join('; ')}; }`);
+      return `${pad}${head} {\n${steps.join('\n')}\n${pad}}\n`;
+    }
+    const decls = [];
+    let cur = '', paren = 0;
+    for (const c of n.body) { if (c === '(') paren++; if (c === ')') paren--; if (c === ';' && !paren) { decls.push(cur); cur = ''; } else cur += c; }
+    if (cur.trim()) decls.push(cur);
+    return `${pad}${head} {\n${decls.map((d) => `${pad}  ${d.trim().replace(/^([\w-]+):\s*/, '$1: ')};`).join('\n')}\n${pad}}\n`;
+  }).join(depth ? '' : '\n');
+}
+
+if (process.argv.includes('--pretty')) {
+  process.stdout.write(format(parse(result)));
+} else {
+  // one rule per line for readability
+  let pretty = '';
+  for (const c of result) { pretty += c; if (c === '}') pretty += '\n'; }
+  process.stdout.write(pretty);
+}
