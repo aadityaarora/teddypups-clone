@@ -63,6 +63,6 @@ function emit(nodes) {
 
 const result = emit(parse(css));
 // one rule per line for readability
-let pretty = '', depth = 0;
-for (const c of result) { pretty += c; if (c === '{') depth++; if (c === '}') { depth--; pretty += '\n'; } }
+let pretty = '';
+for (const c of result) { pretty += c; if (c === '}') pretty += '\n'; }
 process.stdout.write(pretty);

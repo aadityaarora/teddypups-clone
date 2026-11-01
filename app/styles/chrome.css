@@ -1,167 +1,844 @@
-/* Global chrome + hero rules, verbatim from the original CSS (recon/css/10jf32vdx50lp.css). Generated:
-   node tools/pick-css.mjs '^(html,body$|:is\(a,button|\[data-admin\])|\.(tp-(header|nav-link|menu|footer|basket|twinkle|moon|hero|scene|lineup|quilt)|pup-(stop|bubble)|pup-buddy[^{])' --keyframes tp-menu-in,tp-menu-out,tp-menu-link,tp-menu-backdrop-out,tp-pop-up,tp-peek,tp-breathe,tp-blink-open,tp-blink-shut,tp-ear-twitch,tp-twinkle,tp-sunrise */
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){html,body{cursor:url(/cursor/paw.svg) 9 6,auto}
-:is(a,button,summary,label[for],[role=button],[role=tab],select,input[type=checkbox],input[type=radio],input[type=submit]){cursor:url(/cursor/paw-press.svg) 9 6,pointer}
+/*
+ * Global chrome + home hero.
+ * Rules are ported verbatim from the reference site's compiled CSS (recon/css/10jf32vdx50lp.css,
+ * pulled with tools/pick-css.mjs) and only reformatted / grouped here. Values are the originals.
+ *
+ * Sections
+ *   1. Cursor
+ *   2. Header
+ *   3. Nav links
+ *   4. Mobile menu (drawer)
+ *   5. Scenes (shared section backdrop)
+ *   6. Hero
+ *   7. Hero lineup (puppies peeking over the quilt)
+ *   8. Teddy mascot (pup-buddy / pup-stop)
+ *   9. Footer (night sky, moon, basket)
+ */
+
+
+/* 1. Cursor ------------------------------------------------------------------
+   Paw-shaped native cursor, mouse users only. The paw-print trail is a canvas
+   (components/cursor/PawTrail.tsx); see docs/cursor.md. */
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html,
+  body {
+    cursor: url(/cursor/paw.svg) 9 6, auto;
+  }
+
+  /* "pressed" paw over anything clickable */
+  :is(a, button, summary, label[for], [role=button], [role=tab], select,
+      input[type=checkbox], input[type=radio], input[type=submit]) {
+    cursor: url(/cursor/paw-press.svg) 9 6, pointer;
+  }
 }
-.tp-header{transition:transform .5s var(--ease-silk)}
-.tp-header[data-hidden=true]{transform:translateY(-120%)}
-.tp-header:before{content:"";background:var(--color-milk);opacity:0;transition:opacity .35s;position:absolute;inset:0}
-.tp-header__hem{opacity:0;filter:drop-shadow(0 4px 4px #2a170e14);pointer-events:none;transition:opacity .35s;display:block;position:absolute;top:calc(100% - 1px);left:0}
-.tp-header__hem-fill{fill:var(--color-milk)}
-.tp-header__hem-line{fill:none;stroke:#2a170e24;stroke-width:1.5px}
-.tp-header[data-scrolled=true]:before,.tp-header[data-scrolled=true] .tp-header__hem,.tp-header:not([data-home]):before,.tp-header:not([data-home]) .tp-header__hem{opacity:1}
-.tp-header__bar{max-width:110rem;height:var(--header-h);align-items:center;gap:1.5rem;margin-inline:auto;display:flex;position:relative}
-.tp-header__brand{border-radius:999px;flex:none;align-items:center;gap:.75rem;display:flex}
-.tp-header__logo{width:2.6rem;height:2.6rem;transition:rotate .6s var(--ease-pounce)}
-.tp-header__brand:hover .tp-header__logo{rotate:-8deg}
-.tp-header__name{font-size:1.4rem;line-height:1;display:none}
-.tp-header__nav{flex:1;justify-content:center;display:none}
-.tp-header__nav ul{align-items:center;gap:clamp(1.25rem,2.3vw,2.4rem);display:flex}
-.tp-nav-link{white-space:nowrap;color:var(--color-cocoa);align-items:center;padding:.55rem .1rem;font-size:1rem;font-weight:620;transition:color .25s;display:inline-flex;position:relative}
-.tp-nav-link:hover{color:var(--color-toffee-ink)}
-.tp-nav-link[data-active=true]{color:var(--color-toffee-deep)}
-.tp-nav-link__paw{width:.8rem;height:.8rem;color:var(--color-toffee);opacity:0;transition:opacity .25s ease, scale .45s var(--ease-pounce);pointer-events:none;position:absolute;bottom:-.45rem;left:50%;translate:-50%;rotate:-10deg;scale:.4}
-.tp-nav-link:hover .tp-nav-link__paw{opacity:.45;scale:1}
-.tp-nav-link[data-active=true] .tp-nav-link__paw{opacity:1;scale:1}
-.tp-menu-link .tp-nav-link__paw{display:none}
-.tp-header__end{align-items:center;gap:.6rem;margin-left:auto;display:flex}
-.tp-header__wa{min-height:2.75rem!important;padding:.6rem 1.35rem!important;font-size:.95rem!important;display:none!important}
-@media (min-width:768px){.tp-header__logo{width:3rem;height:3rem}
-.tp-header__wa{display:inline-flex!important}
+
+/* Original admin area keeps the normal cursor */
+[data-admin],
+[data-admin] * {
+  cursor: revert !important;
 }
-@media (min-width:1024px){.tp-header__nav{display:flex}
+
+
+/* 2. Header ------------------------------------------------------------------
+   Fixed bar. Transparent over the home hero; milk background + scalloped hem
+   once scrolled (data-scrolled) or on any other page (no data-home).
+   Slides away when scrolling down (data-hidden), see HeaderBehavior.tsx. */
+
+.tp-header {
+  transition: transform .5s var(--ease-silk);
 }
-@media (max-width:1023px){.tp-header__name{font-size:clamp(1.15rem,4.6vw,1.4rem);display:inline}
+
+.tp-header[data-hidden=true] {
+  transform: translateY(-120%);
 }
-@media (min-width:1280px){.tp-header__name{display:inline}
+
+/* background layer that fades in */
+.tp-header:before {
+  content: "";
+  background: var(--color-milk);
+  opacity: 0;
+  transition: opacity .35s;
+  position: absolute;
+  inset: 0;
 }
-.tp-menu[open]{animation:tp-menu-in .5s var(--ease-snap)}
-.tp-menu[data-closing]{animation:tp-menu-out .42s var(--ease-snap) forwards}
-.tp-menu[data-closing]::backdrop{animation:.42s forwards tp-menu-backdrop-out}
-.tp-menu[open] .tp-menu-link{animation:tp-menu-link .55s var(--ease-pounce) both}
-.tp-menu li:nth-child(2) .tp-menu-link{animation-delay:50ms}
-.tp-menu li:nth-child(3) .tp-menu-link{animation-delay:.1s}
-.tp-menu li:nth-child(4) .tp-menu-link{animation-delay:.15s}
-.tp-menu li:nth-child(5) .tp-menu-link{animation-delay:.2s}
-.tp-menu li:nth-child(6) .tp-menu-link{animation-delay:.25s}
-.tp-menu-link[data-active=true]{color:var(--color-toffee-deep)}
-@keyframes tp-menu-in{0%{clip-path:circle(0% at calc(100% - 3rem) 2rem)}
-to{clip-path:circle(150% at calc(100% - 3rem) 2rem)}
+
+/* scalloped edge under the bar */
+.tp-header__hem {
+  opacity: 0;
+  filter: drop-shadow(0 4px 4px #2a170e14);
+  pointer-events: none;
+  transition: opacity .35s;
+  display: block;
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
 }
-@keyframes tp-menu-out{0%{clip-path:circle(150% at calc(100% - 3rem) 2rem)}
-to{clip-path:circle(0% at calc(100% - 3rem) 2rem)}
+
+.tp-header__hem-fill {
+  fill: var(--color-milk);
 }
-@keyframes tp-menu-backdrop-out{to{opacity:0}
+
+.tp-header__hem-line {
+  fill: none;
+  stroke: #2a170e24;
+  stroke-width: 1.5px;
 }
-@keyframes tp-menu-link{0%{opacity:0;transform:translateY(1.2rem)rotate(-2deg)}
+
+.tp-header[data-scrolled=true]:before,
+.tp-header[data-scrolled=true] .tp-header__hem,
+.tp-header:not([data-home]):before,
+.tp-header:not([data-home]) .tp-header__hem {
+  opacity: 1;
 }
-.tp-twinkle{animation:3.2s ease-in-out infinite tp-twinkle}
-@keyframes tp-twinkle{0%,to{opacity:.35;transform:scale(.8)rotate(0)}
-50%{opacity:1;transform:scale(1.1)rotate(20deg)}
+
+.tp-header__bar {
+  max-width: 110rem;
+  height: var(--header-h);
+  align-items: center;
+  gap: 1.5rem;
+  margin-inline: auto;
+  display: flex;
+  position: relative;
 }
-[data-admin],[data-admin] *{cursor:revert!important}
-.pup-stop{pointer-events:none}
-.pup-stop>.pup-buddy{width:100%}
-html[data-pup] .pup-stop>.pup-buddy{visibility:hidden}
-.pup-bubble-at{position:absolute;top:0;left:0}
-.pup-bubble{border:2.5px solid var(--color-cocoa);background:var(--color-milk);color:var(--color-cocoa);font-family:var(--font-hand);white-space:nowrap;opacity:0;transform-origin:30% 100%;transition:scale .4s var(--ease-pounce), opacity .18s ease-out;border-radius:1.1rem 1.1rem 1.1rem .25rem;padding:.3rem .85rem .35rem;font-size:1.05rem;line-height:1.2;position:absolute;bottom:0;left:0;translate:-50%;scale:.4;box-shadow:2px 3px #2a170e2e}
-.pup-bubble[data-show=true]{opacity:1;scale:1}
-.pup-buddy>svg{width:100%;height:auto;display:block}
-.pup-buddy>.pup-bubble{bottom:84%;left:72%}
-.pup-buddy[data-facing=left]>.pup-bubble{left:28%}
-.pup-buddy[data-live]>svg :is(path,ellipse,circle){pointer-events:visiblePainted;cursor:pointer}
-:is(.pup-buddy,.pup-actor) svg [opacity="0"],:is(.pup-buddy,.pup-actor) svg [opacity="0"] *{pointer-events:none!important}
-@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){:is(.pup-buddy[data-live]>svg,.pup-actor svg) :is(path,ellipse,circle){cursor:url(/cursor/paw-press.svg) 9 6,pointer}
+
+/* logo + wordmark */
+.tp-header__brand {
+  border-radius: 999px;
+  flex: none;
+  align-items: center;
+  gap: .75rem;
+  display: flex;
 }
-.tp-scene{--ink:var(--color-cocoa);--ink-soft:var(--color-cocoa-soft);color:var(--ink);background:linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));position:relative}
-.tp-scene[data-tone=dark]{--ink:var(--color-milk);--ink-soft:#fffdf8cc}
-@supports (color:color-mix(in lab, red, red)){.tp-scene[data-tone=dark]{--ink-soft:color-mix(in oklab, var(--color-milk) 80%, transparent)}
+
+.tp-header__logo {
+  width: 2.6rem;
+  height: 2.6rem;
+  transition: rotate .6s var(--ease-pounce);
 }
-.tp-hero{min-height:calc(100svh - var(--header-h));flex-direction:column;display:flex;overflow-x:clip}
-.tp-hero__sun{aspect-ratio:1;background:radial-gradient(circle,#f2be6b6b 0,#fbe3b44d 38%,#0000 66%);border-radius:50%;width:min(86vw,58rem);position:absolute;top:4%;left:50%;translate:-50%}
-@supports (color:color-mix(in lab, red, red)){.tp-hero__sun{background:radial-gradient(circle, color-mix(in oklab, var(--color-honey) 42%, transparent) 0, color-mix(in oklab, var(--color-honey-soft) 30%, transparent) 38%, transparent 66%)}
+
+.tp-header__brand:hover .tp-header__logo {
+  rotate: -8deg;
 }
-.tp-hero__sun{pointer-events:none;animation:tp-sunrise 2.6s var(--ease-silk) both}
-@keyframes tp-sunrise{0%{opacity:0;translate:-50% 16%}
+
+.tp-header__name {
+  font-size: 1.4rem;
+  line-height: 1;
+  display: none;
 }
-.tp-hero__copy{text-align:center;padding-top:clamp(1rem,4.5vh,3.75rem);position:relative}
-.tp-hero__note{color:var(--color-toffee-ink);font-size:clamp(1.1rem,1.7vw,1.5rem);display:inline-block;position:relative}
-.tp-hero__title{max-width:15ch;margin:clamp(.5rem,1.6vh,1.1rem) auto 0;font-size:clamp(2.6rem,min(9.2vw,11vh),8.4rem)}
-.tp-hero__line{display:block}
-.tp-hero__lede{max-width:46ch;color:var(--ink-soft);margin:clamp(.9rem,2.2vh,1.4rem) auto 0;font-size:clamp(1.05rem,1.25vw,1.28rem);line-height:1.5}
-.tp-hero__actions{flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:clamp(1.1rem,3vh,2rem);display:flex}
-.tp-hero__stage{--quilt-h:clamp(4.5rem, 12vh, 8rem);--tw:clamp(15rem, min(30vw, 46vh), 27rem);--rise:clamp(.75rem, 2.4vh, 1.75rem);flex:1;min-height:clamp(14rem,38vh,25rem);margin-top:clamp(.5rem,2vh,1.5rem);position:relative}
-.tp-hero__teddy{left:calc(50% - var(--tw) * .7067);bottom:calc(var(--quilt-h) + 30px - var(--tw) * .2733);width:var(--tw);position:absolute}
-.tp-quilt{z-index:25;height:var(--quilt-h);background:repeating-linear-gradient(45deg, transparent 0 46px, #2a170e12 46px 48px), repeating-linear-gradient(-45deg, transparent 0 46px, #2a170e12 46px 48px), var(--quilt);position:absolute;inset:auto 0 0}
-.tp-quilt__edge{display:block;position:absolute;top:-39px;left:0}
-.tp-lineup{position:absolute;inset:0}
-.tp-lineup__seat{--h0:calc(var(--w) * var(--seat-k,1) * 1.25);--h:calc(var(--h0) + var(--rise,0px));left:var(--x);bottom:calc(var(--quilt-h) - (1 - var(--peek)) * var(--h0));width:calc(var(--w) * var(--seat-k,1));translate:-50%;rotate:var(--tilt);position:absolute}
-.tp-lineup--tags{z-index:31;pointer-events:none}
-.tp-lineup__ghost{height:var(--h);transition:translate .6s var(--ease-pounce);transition-delay:calc(var(--i) * 50ms);display:block;position:relative}
-.tp-lineup__pup{transition:translate .6s var(--ease-pounce);transition-delay:calc(var(--i) * 50ms);animation:tp-peek .75s var(--ease-pounce) backwards;animation-delay:calc(.62s + var(--i) * 90ms);border-radius:999px 999px 0 0;display:block;position:relative}
-.tp-lineup__photo{height:var(--h);border:3px solid var(--color-cocoa);background:var(--color-honey-soft);box-shadow:inset 0 0 0 4px var(--color-milk);transition:translate .45s var(--ease-pounce);border-bottom:0;border-radius:999px 999px 0 0;display:block;position:relative;overflow:hidden}
-@keyframes tp-peek{0%{translate:0 100%}
+
+/* desktop nav (hidden below lg) */
+.tp-header__nav {
+  flex: 1;
+  justify-content: center;
+  display: none;
 }
-.tp-lineup__name{translate:var(--tag-x,-50%) .4rem;border:2px solid var(--color-cocoa);background:var(--color-milk);white-space:nowrap;opacity:0;transition:opacity .2s, translate .35s var(--ease-pounce);border-radius:999px;padding:.1rem .7rem;font-size:.95rem;position:absolute;bottom:calc(100% + .4rem);left:50%}
-.tp-lineup__pup:is(:hover,:focus-visible) .tp-lineup__photo{translate:0 -12%}
-.tp-lineup__seat:first-child{--tag-x:-22%}
-.tp-lineup__seat:nth-child(6){--tag-x:-78%}
-.tp-lineup__pup[data-state=duck] .tp-lineup__photo{opacity:.6;transition:translate .34s var(--ease-snap), scale .34s var(--ease-snap), opacity .34s ease-in;translate:0 108%;scale:.92}
-.tp-lineup__pup[data-state=pop] .tp-lineup__photo{animation:tp-pop-up .58s var(--ease-pounce) both}
-@keyframes tp-pop-up{0%{opacity:.6;translate:0 108%;scale:.92}
-65%{opacity:1;scale:1.04}
-to{opacity:1;translate:0;scale:1}
+
+.tp-header__nav ul {
+  align-items: center;
+  gap: clamp(1.25rem, 2.3vw, 2.4rem);
+  display: flex;
 }
-.tp-lineup__ghost[data-tag=show] .tp-lineup__name{opacity:1;translate:var(--tag-x,-50%) -12%}
-.tp-lineup__wings{clip-path:inset(50%);pointer-events:none;width:1px;height:1px;position:absolute;overflow:hidden}
-.tp-lineup__wings img{width:176px!important;height:220px!important}
-.tp-hero[data-here=false] :is(.tp-lineup__pup,.tp-lineup__ghost){translate:0 58%}
-@media (max-width:639px){.tp-hero__stage{--tw:clamp(13rem, 60vw, 17rem);min-height:clamp(14rem,36vh,19rem)}
-.tp-lineup__seat:first-child{--tag-x:-12%;z-index:1;--x:8%!important;--w:17vw!important;--peek:1.18!important}
-.tp-lineup__seat:nth-child(2){--tag-x:-30%;z-index:2;--x:21%!important;--w:17vw!important;--peek:1.3!important}
-.tp-lineup__seat:nth-child(3){--tag-x:-50%;z-index:3;--x:33.5%!important;--w:17vw!important;--peek:1.12!important}
-.tp-lineup__seat:nth-child(4){--tag-x:-50%;z-index:3;--x:66.5%!important;--w:17vw!important;--peek:1.12!important}
-.tp-lineup__seat:nth-child(5){--tag-x:-70%;z-index:2;--x:79%!important;--w:17vw!important;--peek:1.3!important}
-.tp-lineup__seat:nth-child(6){--tag-x:-88%;z-index:1;--x:92%!important;--w:17vw!important;--peek:1.18!important}
-.tp-lineup__name{text-overflow:ellipsis;max-width:46vw;font-size:.82rem;overflow:hidden}
+
+
+/* 3. Nav links ---------------------------------------------------------------
+   Shared by header and drawer. A small paw appears under the active/hovered link. */
+
+.tp-nav-link {
+  white-space: nowrap;
+  color: var(--color-cocoa);
+  align-items: center;
+  padding: .55rem .1rem;
+  font-size: 1rem;
+  font-weight: 620;
+  transition: color .25s;
+  display: inline-flex;
+  position: relative;
 }
-@media (min-width:640px) and (max-width:1023px){.tp-lineup__seat{--seat-k:.8}
+
+.tp-nav-link:hover {
+  color: var(--color-toffee-ink);
 }
-.tp-scene[data-tone=dark] .btn-ghost{border-color:var(--color-milk);color:var(--color-milk)}
-.tp-scene[data-tone=dark] .btn-ghost:hover{background:var(--color-milk);color:var(--color-cocoa)}
-.tp-footer{--night:#24130b;background:var(--night)}
-.tp-footer__hill{width:100%;height:clamp(2.5rem,5vw,5rem);fill:var(--night);display:block;position:absolute;bottom:calc(100% - 1px);left:0}
-.tp-moon{aspect-ratio:1;width:clamp(2.6rem,4vw,3.6rem);box-shadow:inset -.85rem .25rem 0 0 var(--color-honey-soft);filter:drop-shadow(0 0 18px #fbe3b459);border-radius:50%;position:absolute;top:10%;right:9%;rotate:-18deg}
-.tp-basket{--bw:clamp(14rem, 24vw, 19rem);width:var(--bw);aspect-ratio:300/240;margin-left:calc(var(--bw) * -.36);position:relative}
-.tp-basket>*{width:100%;height:100%;position:absolute;inset:0;overflow:visible}
-.tp-basket>svg{pointer-events:none}
-.tp-basket__back{z-index:1}
-.tp-basket__pup{z-index:10}
-.tp-basket__front{z-index:25}
-.tp-basket__hollow{fill:#5d3519;stroke:var(--color-cocoa);stroke-width:3px}
-.tp-basket__rim-line{fill:none;stroke:var(--color-cocoa);stroke-width:13px;stroke-linecap:round}
-.tp-basket__rim{fill:none;stroke:#e8b46c;stroke-width:7.5px;stroke-linecap:round}
-.tp-basket__body{fill:#d9a05a;stroke:var(--color-cocoa);stroke-width:3px;stroke-linejoin:round}
-.tp-basket__weave{fill:none;stroke:#2a170e47;stroke-width:2.6px;stroke-linecap:round}
-.tp-basket__weave--stakes{stroke:#2a170e26}
-@media (prefers-reduced-motion:no-preference){.tp-basket__pup .pup-buddy:not([data-live])>svg{transform-origin:70% 66%;animation:3.8s ease-in-out infinite tp-breathe}
-.tp-basket__pup .pup-buddy:not([data-live]) [data-p=open]{animation:6.2s infinite tp-blink-open}
-.tp-basket__pup .pup-buddy:not([data-live]) [data-p=shut]{animation:6.2s infinite tp-blink-shut}
-.tp-basket__pup .pup-buddy:not([data-live]) [data-p=earR]{transform-box:view-box;transform-origin:250px 82px;animation:7.4s ease-in-out 2.2s infinite tp-ear-twitch}
+
+.tp-nav-link[data-active=true] {
+  color: var(--color-toffee-deep);
 }
-@keyframes tp-breathe{50%{scale:1 1.014}
+
+.tp-nav-link__paw {
+  width: .8rem;
+  height: .8rem;
+  color: var(--color-toffee);
+  opacity: 0;
+  transition: opacity .25s ease, scale .45s var(--ease-pounce);
+  pointer-events: none;
+  position: absolute;
+  bottom: -.45rem;
+  left: 50%;
+  translate: -50%;
+  rotate: -10deg;
+  scale: .4;
 }
-@keyframes tp-blink-open{0%,92%,97%,to{opacity:1}
-94.5%{opacity:0}
+
+.tp-nav-link:hover .tp-nav-link__paw {
+  opacity: .45;
+  scale: 1;
 }
-@keyframes tp-blink-shut{0%,92%,97%,to{opacity:0}
-94.5%{opacity:1}
+
+.tp-nav-link[data-active=true] .tp-nav-link__paw {
+  opacity: 1;
+  scale: 1;
 }
-@keyframes tp-ear-twitch{0%,84%,to{rotate:0deg}
-87%{rotate:-11deg}
-90%{rotate:5deg}
-93%{rotate:-2deg}
+
+.tp-menu-link .tp-nav-link__paw {
+  display: none;
 }
-@media (max-width:767px) and (prefers-reduced-motion:no-preference),(pointer:coarse) and (max-height:519px) and (prefers-reduced-motion:no-preference){.pup-stop:not([data-lane]){display:none}
+
+/* right side: WhatsApp CTA (md+) and Menu button (< lg) */
+.tp-header__end {
+  align-items: center;
+  gap: .6rem;
+  margin-left: auto;
+  display: flex;
 }
-:is(.tp-notes__teddy:has(>.pup-buddy[data-playing]) .tp-notes__bubble,.tp-notes__teddy:has(>.pup-buddy>.pup-bubble[data-show=true]) .tp-notes__bubble){opacity:0;scale:.4}
+
+.tp-header__wa {
+  min-height: 2.75rem !important;
+  padding: .6rem 1.35rem !important;
+  font-size: .95rem !important;
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .tp-header__logo {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .tp-header__wa {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tp-header__nav {
+    display: flex;
+  }
+}
+
+/* wordmark: shown below lg (next to Menu) and from xl (next to nav) */
+@media (max-width: 1023px) {
+  .tp-header__name {
+    font-size: clamp(1.15rem, 4.6vw, 1.4rem);
+    display: inline;
+  }
+}
+
+@media (min-width: 1280px) {
+  .tp-header__name {
+    display: inline;
+  }
+}
+
+
+/* 4. Mobile menu (drawer) ----------------------------------------------------
+   Full-screen <dialog>. Opens/closes with a circle wipe from the Menu button;
+   links stagger in. data-closing is set by MobileMenu.tsx while the exit plays. */
+
+.tp-menu[open] {
+  animation: tp-menu-in .5s var(--ease-snap);
+}
+
+.tp-menu[data-closing] {
+  animation: tp-menu-out .42s var(--ease-snap) forwards;
+}
+
+.tp-menu[data-closing]::backdrop {
+  animation: .42s forwards tp-menu-backdrop-out;
+}
+
+.tp-menu[open] .tp-menu-link {
+  animation: tp-menu-link .55s var(--ease-pounce) both;
+}
+
+.tp-menu li:nth-child(2) .tp-menu-link { animation-delay: 50ms; }
+.tp-menu li:nth-child(3) .tp-menu-link { animation-delay: .1s; }
+.tp-menu li:nth-child(4) .tp-menu-link { animation-delay: .15s; }
+.tp-menu li:nth-child(5) .tp-menu-link { animation-delay: .2s; }
+.tp-menu li:nth-child(6) .tp-menu-link { animation-delay: .25s; }
+
+.tp-menu-link[data-active=true] {
+  color: var(--color-toffee-deep);
+}
+
+@keyframes tp-menu-in {
+  0% { clip-path: circle(0% at calc(100% - 3rem) 2rem); }
+  to { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
+}
+
+@keyframes tp-menu-out {
+  0% { clip-path: circle(150% at calc(100% - 3rem) 2rem); }
+  to { clip-path: circle(0% at calc(100% - 3rem) 2rem); }
+}
+
+@keyframes tp-menu-backdrop-out {
+  to { opacity: 0; }
+}
+
+@keyframes tp-menu-link {
+  0% { opacity: 0; transform: translateY(1.2rem) rotate(-2deg); }
+}
+
+
+/* 5. Scenes ------------------------------------------------------------------
+   Every home section is a "scene" with a vertical sky gradient (--sky-top/--sky-bottom)
+   and a light or dark tone that sets the ink colours. */
+
+.tp-scene {
+  --ink: var(--color-cocoa);
+  --ink-soft: var(--color-cocoa-soft);
+  color: var(--ink);
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-bottom));
+  position: relative;
+}
+
+.tp-scene[data-tone=dark] {
+  --ink: var(--color-milk);
+  --ink-soft: #fffdf8cc;
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .tp-scene[data-tone=dark] {
+    --ink-soft: color-mix(in oklab, var(--color-milk) 80%, transparent);
+  }
+}
+
+
+/* 6. Hero --------------------------------------------------------------------
+   Fills the first screen: copy on top, a glowing "sun" behind it, and the
+   stage (lineup + Teddy + quilt) taking the remaining height. */
+
+.tp-hero {
+  min-height: calc(100svh - var(--header-h));
+  flex-direction: column;
+  display: flex;
+  overflow-x: clip;
+}
+
+.tp-hero__sun {
+  aspect-ratio: 1;
+  background: radial-gradient(circle, #f2be6b6b 0, #fbe3b44d 38%, #0000 66%);
+  border-radius: 50%;
+  width: min(86vw, 58rem);
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  translate: -50%;
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .tp-hero__sun {
+    background: radial-gradient(circle,
+      color-mix(in oklab, var(--color-honey) 42%, transparent) 0,
+      color-mix(in oklab, var(--color-honey-soft) 30%, transparent) 38%,
+      transparent 66%);
+  }
+}
+
+.tp-hero__sun {
+  pointer-events: none;
+  animation: tp-sunrise 2.6s var(--ease-silk) both;
+}
+
+@keyframes tp-sunrise {
+  0% { opacity: 0; translate: -50% 16%; }
+}
+
+.tp-hero__copy {
+  text-align: center;
+  padding-top: clamp(1rem, 4.5vh, 3.75rem);
+  position: relative;
+}
+
+/* handwritten "every puppy is family" with squiggle underline */
+.tp-hero__note {
+  color: var(--color-toffee-ink);
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  display: inline-block;
+  position: relative;
+}
+
+.tp-hero__title {
+  max-width: 15ch;
+  margin: clamp(.5rem, 1.6vh, 1.1rem) auto 0;
+  font-size: clamp(2.6rem, min(9.2vw, 11vh), 8.4rem);
+}
+
+.tp-hero__line {
+  display: block;
+}
+
+.tp-hero__lede {
+  max-width: 46ch;
+  color: var(--ink-soft);
+  margin: clamp(.9rem, 2.2vh, 1.4rem) auto 0;
+  font-size: clamp(1.05rem, 1.25vw, 1.28rem);
+  line-height: 1.5;
+}
+
+.tp-hero__actions {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+  margin-top: clamp(1.1rem, 3vh, 2rem);
+  display: flex;
+}
+
+/* stage: --quilt-h quilt height, --tw Teddy width, --rise extra photo height */
+.tp-hero__stage {
+  --quilt-h: clamp(4.5rem, 12vh, 8rem);
+  --tw: clamp(15rem, min(30vw, 46vh), 27rem);
+  --rise: clamp(.75rem, 2.4vh, 1.75rem);
+  flex: 1;
+  min-height: clamp(14rem, 38vh, 25rem);
+  margin-top: clamp(.5rem, 2vh, 1.5rem);
+  position: relative;
+}
+
+/* Teddy centred, chin resting on the quilt */
+.tp-hero__teddy {
+  left: calc(50% - var(--tw) * .7067);
+  bottom: calc(var(--quilt-h) + 30px - var(--tw) * .2733);
+  width: var(--tw);
+  position: absolute;
+}
+
+/* quilt: diagonal stitching over --quilt, scalloped SVG edge on top */
+.tp-quilt {
+  z-index: 25;
+  height: var(--quilt-h);
+  background:
+    repeating-linear-gradient(45deg, transparent 0 46px, #2a170e12 46px 48px),
+    repeating-linear-gradient(-45deg, transparent 0 46px, #2a170e12 46px 48px),
+    var(--quilt);
+  position: absolute;
+  inset: auto 0 0;
+}
+
+.tp-quilt__edge {
+  display: block;
+  position: absolute;
+  top: -39px;
+  left: 0;
+}
+
+
+/* 7. Hero lineup -------------------------------------------------------------
+   Arched puppy photos peeking over the quilt. Each seat gets inline vars:
+   --x (centre), --w (width), --peek (how much shows), --tilt, --i (stagger index).
+   A second, pointer-less list (--tags) holds the name tags above the photos. */
+
+.tp-lineup {
+  position: absolute;
+  inset: 0;
+}
+
+.tp-lineup__seat {
+  --h0: calc(var(--w) * var(--seat-k, 1) * 1.25);
+  --h: calc(var(--h0) + var(--rise, 0px));
+  left: var(--x);
+  bottom: calc(var(--quilt-h) - (1 - var(--peek)) * var(--h0));
+  width: calc(var(--w) * var(--seat-k, 1));
+  translate: -50%;
+  rotate: var(--tilt);
+  position: absolute;
+}
+
+.tp-lineup--tags {
+  z-index: 31;
+  pointer-events: none;
+}
+
+.tp-lineup__ghost {
+  height: var(--h);
+  transition: translate .6s var(--ease-pounce);
+  transition-delay: calc(var(--i) * 50ms);
+  display: block;
+  position: relative;
+}
+
+.tp-lineup__pup {
+  transition: translate .6s var(--ease-pounce);
+  transition-delay: calc(var(--i) * 50ms);
+  animation: tp-peek .75s var(--ease-pounce) backwards;
+  animation-delay: calc(.62s + var(--i) * 90ms);
+  border-radius: 999px 999px 0 0;
+  display: block;
+  position: relative;
+}
+
+.tp-lineup__photo {
+  height: var(--h);
+  border: 3px solid var(--color-cocoa);
+  background: var(--color-honey-soft);
+  box-shadow: inset 0 0 0 4px var(--color-milk);
+  transition: translate .45s var(--ease-pounce);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* pups rise into place on load */
+@keyframes tp-peek {
+  0% { translate: 0 100%; }
+}
+
+.tp-lineup__name {
+  translate: var(--tag-x, -50%) .4rem;
+  border: 2px solid var(--color-cocoa);
+  background: var(--color-milk);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .2s, translate .35s var(--ease-pounce);
+  border-radius: 999px;
+  padding: .1rem .7rem;
+  font-size: .95rem;
+  position: absolute;
+  bottom: calc(100% + .4rem);
+  left: 50%;
+}
+
+/* hover: photo pops up a little */
+.tp-lineup__pup:is(:hover, :focus-visible) .tp-lineup__photo {
+  translate: 0 -12%;
+}
+
+/* keep edge tags on screen */
+.tp-lineup__seat:first-child { --tag-x: -22%; }
+.tp-lineup__seat:nth-child(6) { --tag-x: -78%; }
+
+/* rotation states set by the original's JS (duck out, pop back in) */
+.tp-lineup__pup[data-state=duck] .tp-lineup__photo {
+  opacity: .6;
+  transition: translate .34s var(--ease-snap), scale .34s var(--ease-snap), opacity .34s ease-in;
+  translate: 0 108%;
+  scale: .92;
+}
+
+.tp-lineup__pup[data-state=pop] .tp-lineup__photo {
+  animation: tp-pop-up .58s var(--ease-pounce) both;
+}
+
+@keyframes tp-pop-up {
+  0% { opacity: .6; translate: 0 108%; scale: .92; }
+  65% { opacity: 1; scale: 1.04; }
+  to { opacity: 1; translate: 0; scale: 1; }
+}
+
+.tp-lineup__ghost[data-tag=show] .tp-lineup__name {
+  opacity: 1;
+  translate: var(--tag-x, -50%) -12%;
+}
+
+/* off-screen preload of the next pup's photo */
+.tp-lineup__wings {
+  clip-path: inset(50%);
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.tp-lineup__wings img {
+  width: 176px !important;
+  height: 220px !important;
+}
+
+/* lineup tucked down while the hero is off-screen */
+.tp-hero[data-here=false] :is(.tp-lineup__pup, .tp-lineup__ghost) {
+  translate: 0 58%;
+}
+
+/* phones: six equal narrow arches packed around Teddy */
+@media (max-width: 639px) {
+  .tp-hero__stage {
+    --tw: clamp(13rem, 60vw, 17rem);
+    min-height: clamp(14rem, 36vh, 19rem);
+  }
+
+  .tp-lineup__seat:first-child { --tag-x: -12%; z-index: 1; --x: 8% !important;    --w: 17vw !important; --peek: 1.18 !important; }
+  .tp-lineup__seat:nth-child(2) { --tag-x: -30%; z-index: 2; --x: 21% !important;   --w: 17vw !important; --peek: 1.3 !important; }
+  .tp-lineup__seat:nth-child(3) { --tag-x: -50%; z-index: 3; --x: 33.5% !important; --w: 17vw !important; --peek: 1.12 !important; }
+  .tp-lineup__seat:nth-child(4) { --tag-x: -50%; z-index: 3; --x: 66.5% !important; --w: 17vw !important; --peek: 1.12 !important; }
+  .tp-lineup__seat:nth-child(5) { --tag-x: -70%; z-index: 2; --x: 79% !important;   --w: 17vw !important; --peek: 1.3 !important; }
+  .tp-lineup__seat:nth-child(6) { --tag-x: -88%; z-index: 1; --x: 92% !important;   --w: 17vw !important; --peek: 1.18 !important; }
+
+  .tp-lineup__name {
+    text-overflow: ellipsis;
+    max-width: 46vw;
+    font-size: .82rem;
+    overflow: hidden;
+  }
+}
+
+/* tablets: seats at 80% size */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .tp-lineup__seat {
+    --seat-k: .8;
+  }
+}
+
+/* ghost buttons on dark scenes */
+.tp-scene[data-tone=dark] .btn-ghost {
+  border-color: var(--color-milk);
+  color: var(--color-milk);
+}
+
+.tp-scene[data-tone=dark] .btn-ghost:hover {
+  background: var(--color-milk);
+  color: var(--color-cocoa);
+}
+
+
+/* 8. Teddy mascot ------------------------------------------------------------
+   Static SVG Teddy (components/art/PupStop.tsx). In the original, a JS "actor"
+   takes over when html[data-pup] is set; here only the static poses are used. */
+
+.pup-stop {
+  pointer-events: none;
+}
+
+.pup-stop > .pup-buddy {
+  width: 100%;
+}
+
+html[data-pup] .pup-stop > .pup-buddy {
+  visibility: hidden;
+}
+
+/* speech bubble (hidden unless data-show) */
+.pup-bubble-at {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pup-bubble {
+  border: 2.5px solid var(--color-cocoa);
+  background: var(--color-milk);
+  color: var(--color-cocoa);
+  font-family: var(--font-hand);
+  white-space: nowrap;
+  opacity: 0;
+  transform-origin: 30% 100%;
+  transition: scale .4s var(--ease-pounce), opacity .18s ease-out;
+  border-radius: 1.1rem 1.1rem 1.1rem .25rem;
+  padding: .3rem .85rem .35rem;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  translate: -50%;
+  scale: .4;
+  box-shadow: 2px 3px #2a170e2e;
+}
+
+.pup-bubble[data-show=true] {
+  opacity: 1;
+  scale: 1;
+}
+
+.pup-buddy > svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pup-buddy > .pup-bubble {
+  bottom: 84%;
+  left: 72%;
+}
+
+.pup-buddy[data-facing=left] > .pup-bubble {
+  left: 28%;
+}
+
+/* interactive (pettable) Teddy, original JS only */
+.pup-buddy[data-live] > svg :is(path, ellipse, circle) {
+  pointer-events: visiblePainted;
+  cursor: pointer;
+}
+
+:is(.pup-buddy, .pup-actor) svg [opacity="0"],
+:is(.pup-buddy, .pup-actor) svg [opacity="0"] * {
+  pointer-events: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(.pup-buddy[data-live] > svg, .pup-actor svg) :is(path, ellipse, circle) {
+    cursor: url(/cursor/paw-press.svg) 9 6, pointer;
+  }
+}
+
+/* small screens: only Teddys that sit in a "lane" are shown */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference),
+       (pointer: coarse) and (max-height: 519px) and (prefers-reduced-motion: no-preference) {
+  .pup-stop:not([data-lane]) {
+    display: none;
+  }
+}
+
+/* FAQ notes board: hide its bubble while Teddy is talking (used on /faq) */
+:is(.tp-notes__teddy:has(> .pup-buddy[data-playing]) .tp-notes__bubble,
+    .tp-notes__teddy:has(> .pup-buddy > .pup-bubble[data-show=true]) .tp-notes__bubble) {
+  opacity: 0;
+  scale: .4;
+}
+
+
+/* 9. Footer ------------------------------------------------------------------
+   Night-sky footer: wavy hill on top, twinkling stars, crescent moon,
+   and Teddy breathing/blinking in a basket. */
+
+.tp-footer {
+  --night: #24130b;
+  background: var(--night);
+}
+
+.tp-footer__hill {
+  width: 100%;
+  height: clamp(2.5rem, 5vw, 5rem);
+  fill: var(--night);
+  display: block;
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 0;
+}
+
+.tp-twinkle {
+  animation: 3.2s ease-in-out infinite tp-twinkle;
+}
+
+@keyframes tp-twinkle {
+  0%, to { opacity: .35; transform: scale(.8) rotate(0); }
+  50% { opacity: 1; transform: scale(1.1) rotate(20deg); }
+}
+
+/* crescent: a circle with an inset shadow */
+.tp-moon {
+  aspect-ratio: 1;
+  width: clamp(2.6rem, 4vw, 3.6rem);
+  box-shadow: inset -.85rem .25rem 0 0 var(--color-honey-soft);
+  filter: drop-shadow(0 0 18px #fbe3b459);
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  right: 9%;
+  rotate: -18deg;
+}
+
+/* basket: back rim, Teddy, then front weave stacked on top of each other */
+.tp-basket {
+  --bw: clamp(14rem, 24vw, 19rem);
+  width: var(--bw);
+  aspect-ratio: 300 / 240;
+  margin-left: calc(var(--bw) * -.36);
+  position: relative;
+}
+
+.tp-basket > * {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.tp-basket > svg { pointer-events: none; }
+.tp-basket__back { z-index: 1; }
+.tp-basket__pup { z-index: 10; }
+.tp-basket__front { z-index: 25; }
+
+.tp-basket__hollow {
+  fill: #5d3519;
+  stroke: var(--color-cocoa);
+  stroke-width: 3px;
+}
+
+.tp-basket__rim-line {
+  fill: none;
+  stroke: var(--color-cocoa);
+  stroke-width: 13px;
+  stroke-linecap: round;
+}
+
+.tp-basket__rim {
+  fill: none;
+  stroke: #e8b46c;
+  stroke-width: 7.5px;
+  stroke-linecap: round;
+}
+
+.tp-basket__body {
+  fill: #d9a05a;
+  stroke: var(--color-cocoa);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.tp-basket__weave {
+  fill: none;
+  stroke: #2a170e47;
+  stroke-width: 2.6px;
+  stroke-linecap: round;
+}
+
+.tp-basket__weave--stakes {
+  stroke: #2a170e26;
+}
+
+/* idle animation: breathe, blink, ear twitch */
+@media (prefers-reduced-motion: no-preference) {
+  .tp-basket__pup .pup-buddy:not([data-live]) > svg {
+    transform-origin: 70% 66%;
+    animation: 3.8s ease-in-out infinite tp-breathe;
+  }
+
+  .tp-basket__pup .pup-buddy:not([data-live]) [data-p=open] {
+    animation: 6.2s infinite tp-blink-open;
+  }
+
+  .tp-basket__pup .pup-buddy:not([data-live]) [data-p=shut] {
+    animation: 6.2s infinite tp-blink-shut;
+  }
+
+  .tp-basket__pup .pup-buddy:not([data-live]) [data-p=earR] {
+    transform-box: view-box;
+    transform-origin: 250px 82px;
+    animation: 7.4s ease-in-out 2.2s infinite tp-ear-twitch;
+  }
+}
+
+@keyframes tp-breathe {
+  50% { scale: 1 1.014; }
+}
+
+@keyframes tp-blink-open {
+  0%, 92%, 97%, to { opacity: 1; }
+  94.5% { opacity: 0; }
+}
+
+@keyframes tp-blink-shut {
+  0%, 92%, 97%, to { opacity: 0; }
+  94.5% { opacity: 1; }
+}
+
+@keyframes tp-ear-twitch {
+  0%, 84%, to { rotate: 0deg; }
+  87% { rotate: -11deg; }
+  90% { rotate: 5deg; }
+  93% { rotate: -2deg; }
+}

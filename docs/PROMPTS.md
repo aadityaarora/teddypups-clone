@@ -20,3 +20,12 @@ Do these in order, fixing any errors yourself:
 8. Run the verify loop from CLAUDE.md for / at all 3 sizes and fix differences.
 9. git add -A and commit.
 When finished, give me a short summary of what you built and anything you could not match.
+
+### 2026-11-02: Prepare repo for GitHub
+Prepare the repo for GitHub:
+1. recon/ must never be in git. Make sure .gitignore has recon/ and remove recon/ from ALL commits (history rewrite is fine, nothing is pushed yet). Confirm no file over 50 MB remains in history and show me git count-objects -vH.
+2. Make app/styles/chrome.css readable: formatted, grouped by component, with short comments. Do not change visual output. Re-run the verify loop for / to confirm nothing changed.
+3. Write README.md: overview, live URL placeholder, stack, folder structure, how to run, what each script in tools/ does, and a note that images and content come from the reference site for this assessment.
+4. Run npm run build and fix anything that fails.
+5. If the gh CLI is installed and logged in, create a public GitHub repo named teddypups-clone and push main. If not, stop and tell me exactly what to do.
+Commit everything.

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Downloaded reference material (minified third-party JS), never committed
+    "recon/**",
   ]),
 ]);
 
